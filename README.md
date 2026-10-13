@@ -8,15 +8,33 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Tesseract OCR](https://img.shields.io/badge/Tesseract_OCR-5.5+-blue)](https://github.com/tesseract-ocr/tesseract)
 [![Ollama](https://img.shields.io/badge/Ollama-Qwen2.5_1.5B-black?logo=ollama&logoColor=white)](https://ollama.com/)
+[![Vercel Deployed](https://img.shields.io/badge/Deployed-Vercel-black?logo=vercel&logoColor=white)](https://micro-gst-saas-ivzvy9erb-sriram-paila.vercel.app)
 [![License Status](https://img.shields.io/badge/License-Unlicensed-lightgrey)](#16-contribution-and-license)
 
 > **IMPORTANT STATUTORY NOTICE:**  
 > This software is an **academic prototype and automated draft preparation assistant**. It **does not file returns autonomously with the Goods and Services Tax Network (GSTN)**, does not connect to live government tax filing APIs, and does not provide legal or financial tax advisory. All generated GSTR-1 drafts, CSVs, and Excel files must undergo mandatory review and verification by an authorized signatory before submission on the GST portal.
 
+> **Live Production Website:**  
+> 🔗 [https://micro-gst-saas-ivzvy9erb-sriram-paila.vercel.app](https://micro-gst-saas-ivzvy9erb-sriram-paila.vercel.app)  
+> *(Secondary alias: [https://micro-gst-saas-sriram-paila.vercel.app](https://micro-gst-saas-sriram-paila.vercel.app))*
+
+---
+
+## 📌 Project Repositories & Quick Links
+
+| Scope / Component | Repository | Description | Direct Link |
+| :--- | :--- | :--- | :--- |
+| **Complete System (Monorepo)** | `gst-invoice-processing-system` | Complete end-to-end codebase (Frontend, Backend, Docs, Benchmarks) | [![GitHub](https://img.shields.io/badge/GitHub-gst--invoice--processing--system-181717?logo=github)](https://github.com/srirampaila/gst-invoice-processing-system) |
+| **Frontend UI** | `gst-invoice-processing-frontend` | Standalone React 18, TypeScript, Vite & Tailwind CSS dashboard | [![GitHub](https://img.shields.io/badge/GitHub-gst--invoice--processing--frontend-181717?logo=github)](https://github.com/srirampaila/gst-invoice-processing-frontend) |
+| **Backend API** | `gst-invoice-processing-backend` | Standalone FastAPI, OpenCV, Tesseract OCR & Ollama LLM backend | [![GitHub](https://img.shields.io/badge/GitHub-gst--invoice--processing--backend-181717?logo=github)](https://github.com/srirampaila/gst-invoice-processing-backend) |
+| **Live Web App** | Production Deployment | Live production frontend running on Vercel Global Edge CDN | [![Vercel](https://img.shields.io/badge/Vercel-Live_Deployment-black?logo=vercel)](https://micro-gst-saas-ivzvy9erb-sriram-paila.vercel.app) |
+| **Original Development Repo** | `micro-GST-saas-` | Development history, full audit trail, and initial commit log | [![GitHub](https://img.shields.io/badge/GitHub-micro--GST--saas--181717?logo=github)](https://github.com/srirampaila/micro-GST-saas-) |
+
 ---
 
 ## Table of Contents
 
+- [Project Repositories & Quick Links](#-project-repositories--quick-links)
 1. [Project Introduction](#1-project-introduction)
    - [Project Overview](#project-overview)
    - [Problem Statement](#problem-statement)
@@ -496,9 +514,10 @@ curl -fsSL https://ollama.com/install.sh | sh
 Follow these exact commands to install the repository from scratch:
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/srirampaila/micro-GST-saas-.git
-cd micro-GST-saas-
+# 1. Clone the complete system repository (or individual frontend/backend repos)
+git clone https://github.com/srirampaila/gst-invoice-processing-system.git
+cd gst-invoice-processing-system
+# (Original development repo: git clone https://github.com/srirampaila/micro-GST-saas-.git)
 
 # 2. Create and activate a Python virtual environment
 python3 -m venv .venv

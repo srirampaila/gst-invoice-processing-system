@@ -105,3 +105,31 @@ def test_architecture_summary_endpoint():
     assert "principles" in data
     assert "stages" in data
     assert "viva_qa" in data
+
+def test_missing_invoice_404():
+    req_body = {
+        "file_name": "NON_EXISTENT_INVOICE_999.png",
+        "provider": "mock"
+    }
+    response = client.post("/api/invoices/process", json=req_body)
+    assert response.status_code == 404
+    assert "not found" in response.json()["detail"].lower()
+
+def test_cors_options_request():
+    headers = {
+        "Origin": "http://localhost:5173",
+        "Access-Control-Request-Method": "POST",
+        "Access-Control-Request-Headers": "content-type",
+    }
+    response = client.options("/api/invoices/process", headers=headers)
+    assert response.status_code == 200
+    assert response.headers.get("access-control-allow-origin") == "http://localhost:5173"
+    assert response.headers.get("access-control-allow-credentials") == "true"
+
+def test_environment_validator():
+    from src.utils.config_validator import validate_environment
+    res = validate_environment()
+    assert "status" in res
+    assert "diagnostics" in res
+    assert "warnings" in res
+

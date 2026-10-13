@@ -13,22 +13,41 @@ from src.api.routers.evaluation import router as evaluation_router
 
 load_dotenv()
 
+import os
+from contextlib import asynccontextmanager
+from src.utils.paths import ensure_data_directories
+from src.utils.config_validator import validate_environment
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Ensure data directories exist and validate deployment configuration on startup."""
+    ensure_data_directories()
+    validate_environment()
+    yield
+
 app = FastAPI(
     title="GST Invoice Intelligence API",
     description="Deterministic GST Validation, Multi-Factor Confidence Scoring, and GSTR-1 Draft Preparation API",
-    version="1.0.0"
+    version="1.0.0",
+    lifespan=lifespan
 )
 
-# Enable CORS for React frontend (Vite dev server default ports)
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
+# Parse configurable CORS origins (comma-separated), falling back to safe local dev origins
+raw_cors = os.getenv("CORS_ORIGINS", "")
+if raw_cors.strip():
+    allowed_origins = [origin.strip() for origin in raw_cors.split(",") if origin.strip()]
+else:
+    allowed_origins = [
         "http://localhost:5173",
         "http://127.0.0.1:5173",
         "http://localhost:3000",
         "http://127.0.0.1:3000",
-        "*"
-    ],
+    ]
+
+# Enable CORS for frontend with explicit allowed origins (never wildcard with credentials)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -62,3 +81,11 @@ def root():
             "/api/architecture/summary"
         ]
     }
+
+if __name__ == "__main__":
+    import uvicorn
+    host = os.getenv("HOST", "0.0.0.0")
+    port = int(os.getenv("PORT", "8000"))
+    reload = os.getenv("APP_ENV", "development").lower() == "development"
+    uvicorn.run("src.api.app:app", host=host, port=port, reload=reload)
+

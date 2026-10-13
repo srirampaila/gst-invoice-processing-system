@@ -21,11 +21,6 @@ export const App: React.FC = () => {
     api.getProviders().then((res) => {
       setSelectedProvider(res.default_provider);
     }).catch(console.error);
-
-    // Initial pre-load of clean invoice result for seamless instant inspection
-    api.processInvoice({ fileName: 'INV_CLEAN_001.png', provider: 'mock' })
-      .then(setActiveResult)
-      .catch(console.error);
   }, []);
 
   return (

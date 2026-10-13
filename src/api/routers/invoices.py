@@ -24,12 +24,9 @@ from src.confidence.config import ConfidenceConfig
 from src.confidence.models import ReviewRecord
 from src.gst.gstr1_mapper import map_canonical_to_gstr1
 from src.gst.gstr1_models import GSTR1B2BInvoice, GSTR1B2CSInvoice
+from src.utils.paths import RAW_INVOICES_DIR, TEMP_PROCESSED_DIR, REVIEWS_DIR
 
 router = APIRouter(prefix="/api/invoices", tags=["Invoices"])
-
-RAW_INVOICES_DIR = Path("data/raw/invoices")
-TEMP_PROCESSED_DIR = Path("data/processed/temp")
-REVIEWS_DIR = Path("data/outputs/confidence/reviews")
 
 TEMP_PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
 REVIEWS_DIR.mkdir(parents=True, exist_ok=True)

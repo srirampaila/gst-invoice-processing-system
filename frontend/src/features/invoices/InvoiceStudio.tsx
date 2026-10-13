@@ -37,8 +37,8 @@ export const InvoiceStudio: React.FC<InvoiceStudioProps> = ({
 }) => {
   const [sourceTab, setSourceTab] = useState<'samples' | 'upload'>('samples');
   const [samples, setSamples] = useState<SampleInvoice[]>([]);
-  const [selectedFile, setSelectedFile] = useState<string | null>('INV_CLEAN_001.png');
-  const [selectedImageUrl, setSelectedImageUrl] = useState<string>('/api/invoices/image/INV_CLEAN_001.png');
+  const [selectedFile, setSelectedFile] = useState<string | null>(null);
+  const [selectedImageUrl, setSelectedImageUrl] = useState<string>('');
   const [isExecuting, setIsExecuting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -52,7 +52,13 @@ export const InvoiceStudio: React.FC<InvoiceStudioProps> = ({
   const navigate = useNavigate();
 
   useEffect(() => {
-    api.getSamples().then(setSamples).catch(console.error);
+    api.getSamples().then((loaded) => {
+      setSamples(loaded);
+      if (loaded.length > 0) {
+        setSelectedFile(loaded[0].file_name);
+        setSelectedImageUrl(loaded[0].image_url);
+      }
+    }).catch(console.error);
   }, []);
 
   const handleSelectSample = (sample: SampleInvoice) => {
@@ -270,7 +276,29 @@ export const InvoiceStudio: React.FC<InvoiceStudioProps> = ({
             </div>
           )}
 
-          {/* Pipeline Results Summary Card */}
+          {/* Pipeline Results / Empty State */}
+          {!activeResult && (
+            <Card variant="subtle" padding="md" className="text-center py-8 space-y-3">
+              <div className="w-10 h-10 rounded-full bg-[#E6F0E9] text-[#246B50] flex items-center justify-center mx-auto">
+                <Play className="w-5 h-5 fill-current ml-0.5" />
+              </div>
+              <h3 className="font-serif font-bold text-sm text-[#20251F]">
+                Ready to Process Invoice
+              </h3>
+              <p className="text-xs text-[#60695C] max-w-md mx-auto">
+                {selectedFile ? (
+                  <>
+                    Ready to process <code className="font-mono text-[#246B50] font-semibold">{selectedFile}</code>. Click <strong>"Execute End-to-End Pipeline"</strong> above to run vision preprocessing, OCR, entity extraction, deterministic validation, and return mapping.
+                  </>
+                ) : (
+                  <>
+                    Select an invoice from the benchmark catalog or upload your own document on the left, then click <strong>"Execute End-to-End Pipeline"</strong>.
+                  </>
+                )}
+              </p>
+            </Card>
+          )}
+
           {activeResult && (
             <Card
               variant="white"

@@ -15,13 +15,14 @@ from src.validation.config import ValidationConfig
 from src.extraction.service import extract_invoice_from_ocr
 from src.extraction.config import ExtractionConfig
 from src.gst.gstr1_mapper import map_canonical_to_gstr1
+from src.utils.paths import (
+    REVIEWS_DIR,
+    CONFIDENCE_RESULTS_DIR,
+    VALIDATION_RESULTS_DIR,
+    EXTRACTION_JSON_DIR
+)
 
 router = APIRouter(prefix="/api/reviews", tags=["Human Review"])
-
-REVIEWS_DIR = Path("data/outputs/confidence/reviews")
-CONFIDENCE_RESULTS_DIR = Path("data/outputs/confidence/results")
-VALIDATION_RESULTS_DIR = Path("data/outputs/validation/results")
-EXTRACTION_JSON_DIR = Path("data/outputs/extraction/json")
 
 REVIEWS_DIR.mkdir(parents=True, exist_ok=True)
 

@@ -6,10 +6,9 @@ import pandas as pd
 from pathlib import Path
 from fastapi import APIRouter
 
-router = APIRouter(prefix="/api/evaluation", tags=["Evaluation & Benchmarks"])
+from src.utils.paths import EVALUATION_DIR, PERFORMANCE_DIR
 
-EVALUATION_DIR = Path("data/outputs/evaluation")
-PERFORMANCE_DIR = Path("data/outputs/performance")
+router = APIRouter(prefix="/api/evaluation", tags=["Evaluation & Benchmarks"])
 
 @router.get("/metrics")
 def get_evaluation_metrics():

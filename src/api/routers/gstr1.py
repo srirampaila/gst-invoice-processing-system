@@ -11,9 +11,10 @@ from src.gst.gstr1_models import GSTR1Draft
 from src.utils.process_gstr1_batch import run_gstr1_batch
 from src.api.models import BatchGSTR1RunResponse
 
+from src.utils.paths import GSTR1_DIR
+
 router = APIRouter(prefix="/api/gstr1", tags=["GSTR-1 Draft"])
 
-GSTR1_DIR = Path("data/outputs/gstr1")
 GSTR1_DIR.mkdir(parents=True, exist_ok=True)
 
 OUT_CSV_COMBINED = GSTR1_DIR / "gstr1_draft.csv"

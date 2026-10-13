@@ -8,14 +8,17 @@ import json
 from pathlib import Path
 from fastapi import APIRouter
 from src.api.models import HealthResponse, ProvidersResponse, ProviderInfo
+from src.utils.paths import RAW_INVOICES_DIR
 
 router = APIRouter(prefix="/api", tags=["System"])
 
-RAW_INVOICES_DIR = Path("data/raw/invoices")
+def get_ollama_base_url() -> str:
+    return os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434").rstrip("/")
 
 def is_ollama_online() -> bool:
     try:
-        req = urllib.request.Request("http://127.0.0.1:11434/api/tags", headers={"User-Agent": "FastAPIBridge"})
+        url = f"{get_ollama_base_url()}/api/tags"
+        req = urllib.request.Request(url, headers={"User-Agent": "FastAPIBridge"})
         with urllib.request.urlopen(req, timeout=1) as response:
             return response.status == 200
     except Exception:
@@ -23,7 +26,8 @@ def is_ollama_online() -> bool:
 
 def get_ollama_tags() -> list:
     try:
-        req = urllib.request.Request("http://127.0.0.1:11434/api/tags", headers={"User-Agent": "FastAPIBridge"})
+        url = f"{get_ollama_base_url()}/api/tags"
+        req = urllib.request.Request(url, headers={"User-Agent": "FastAPIBridge"})
         with urllib.request.urlopen(req, timeout=1) as response:
             if response.status == 200:
                 data = json.loads(response.read().decode("utf-8"))
@@ -72,7 +76,7 @@ def get_providers():
         ProviderInfo(
             id="ollama",
             name="Local Ollama AI (Qwen2.5 1.5B)",
-            description="Locally hosted real LLM executing on http://127.0.0.1:11434 with zero data leakage",
+            description=f"Locally hosted real LLM executing on {get_ollama_base_url()} with zero data leakage",
             available=ollama_ok,
             is_local=True,
             requires_key=False,

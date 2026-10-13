@@ -7,7 +7,7 @@ import {
   GSTR1Draft,
 } from '../types';
 
-const API_BASE = ''; // Uses Vite proxy in development or direct host in production
+const API_BASE = (import.meta.env?.VITE_API_BASE_URL || '').replace(/\/$/, ''); // Configurable backend URL or relative proxy
 
 async function handleResponse<T>(res: Response): Promise<T> {
   if (!res.ok) {

@@ -3,7 +3,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://api-placeholder.your-domain.com/api/:path*"
+      "destination": "https://boom-montana-eleven-brighton.trycloudflare.com/api/:path*"
     },
     {
       "source": "/:path*",

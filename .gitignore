@@ -1,0 +1,35 @@
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Frontend
+node_modules/
+dist/
+*.tsbuildinfo
+.npm/
+
+# Data (Never commit sensitive invoice data)
+data/raw/*
+data/processed/*
+data/outputs/*
+!data/samples/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# OS Files
+.DS_Store
+Thumbs.db

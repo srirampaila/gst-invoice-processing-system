@@ -37,11 +37,6 @@ export const api = {
     return handleResponse<ProvidersResponse>(res);
   },
 
-  async getArchitectureSummary(): Promise<any> {
-    const res = await fetch(`${API_BASE}/api/architecture/summary`);
-    return handleResponse<any>(res);
-  },
-
   // Invoices & Pipeline
   async getSamples(): Promise<SampleInvoice[]> {
     const res = await fetch(`${API_BASE}/api/invoices/samples`);

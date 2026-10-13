@@ -7,7 +7,6 @@ import {
   ArrowRight,
   ShieldCheck,
   TrendingUp,
-  Cpu,
   RefreshCw,
 } from 'lucide-react';
 import { StatCard } from '../../components/common/StatCard';
@@ -140,136 +139,58 @@ export const ExecutiveOverview: React.FC = () => {
         />
       </div>
 
-      {/* Architecture & Pipeline Highlights */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <Card
-          variant="white"
-          className="lg:col-span-2"
-          header={
-            <div className="flex items-center justify-between w-full">
-              <span className="font-serif font-bold text-base text-[#20251F]">
-                Pipeline Architecture &amp; Separation of Concerns
+      {/* Quick Launch Workspaces */}
+      <Card
+        variant="subtle"
+        header={<span className="font-serif font-bold text-base text-[#20251F]">Quick Workspaces</span>}
+      >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-1">
+          <button
+            onClick={() => navigate('/studio')}
+            className="w-full text-left p-4 bg-white hover:bg-[#E6F0E9] border border-[#E2E0D8] rounded-lg transition-all flex items-center justify-between group cursor-pointer shadow-fine"
+          >
+            <div>
+              <span className="font-semibold text-xs text-[#20251F] block mb-1">
+                🚀 Single Invoice Processing Studio
               </span>
-              <Badge variant="slate">Deterministic Decimal Engine</Badge>
+              <span className="text-[11px] text-[#60695C] leading-snug">
+                Upload scan or select from 25 benchmark samples
+              </span>
             </div>
-          }
-        >
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-2">
-            <div className="p-4 bg-[#FAFAF8] rounded-lg border border-[#E2E0D8]">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="w-6 h-6 rounded-full bg-[#E6F0E9] text-[#1B523D] flex items-center justify-center text-xs font-bold font-mono">
-                  1
-                </span>
-                <h4 className="font-semibold text-xs uppercase tracking-wider text-[#20251F]">
-                  Vision &amp; OCR Engine
-                </h4>
-              </div>
-              <p className="text-xs text-[#60695C] leading-relaxed">
-                OpenCV preprocessing (CLAHE, Bilateral Denoise, 2x Scaling, Hough Deskew) reduces Character Error Rate (CER) by{' '}
-                <span className="font-semibold text-[#1B523D]">75.0%</span> before Tesseract 5.5.3 text tokenization.
-              </p>
+            <ArrowRight className="w-4 h-4 text-[#60695C] group-hover:text-[#246B50] group-hover:translate-x-1 transition-all shrink-0 ml-3" />
+          </button>
+
+          <button
+            onClick={() => navigate('/gstr1')}
+            className="w-full text-left p-4 bg-white hover:bg-[#E6F0E9] border border-[#E2E0D8] rounded-lg transition-all flex items-center justify-between group cursor-pointer shadow-fine"
+          >
+            <div>
+              <span className="font-semibold text-xs text-[#20251F] block mb-1">
+                📑 GSTR-1 Draft Return &amp; Exports
+              </span>
+              <span className="text-[11px] text-[#60695C] leading-snug">
+                Download B2B Table 4A, B2CS CSVs and Excel (.xlsx)
+              </span>
             </div>
+            <ArrowRight className="w-4 h-4 text-[#60695C] group-hover:text-[#246B50] group-hover:translate-x-1 transition-all shrink-0 ml-3" />
+          </button>
 
-            <div className="p-4 bg-[#FAFAF8] rounded-lg border border-[#E2E0D8]">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="w-6 h-6 rounded-full bg-[#E6F0E9] text-[#1B523D] flex items-center justify-center text-xs font-bold font-mono">
-                  2
-                </span>
-                <h4 className="font-semibold text-xs uppercase tracking-wider text-[#20251F]">
-                  LLM Structured Extraction
-                </h4>
-              </div>
-              <p className="text-xs text-[#60695C] leading-relaxed">
-                Local Ollama Qwen2.5 1.5B or MockLLM interprets raw text into the Pydantic{' '}
-                <code className="bg-[#EFEFEA] px-1 py-0.5 rounded text-[11px]">CanonicalInvoice</code> schema.
-              </p>
+          <button
+            onClick={() => navigate('/evaluation')}
+            className="w-full text-left p-4 bg-white hover:bg-[#E6F0E9] border border-[#E2E0D8] rounded-lg transition-all flex items-center justify-between group cursor-pointer shadow-fine"
+          >
+            <div>
+              <span className="font-semibold text-xs text-[#20251F] block mb-1">
+                🧪 Scientific Evaluation &amp; Benchmarks
+              </span>
+              <span className="text-[11px] text-[#60695C] leading-snug">
+                100% test pass rate, CER/WER deltas, confusion matrices
+              </span>
             </div>
-
-            <div className="p-4 bg-[#FAFAF8] rounded-lg border border-[#E2E0D8]">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="w-6 h-6 rounded-full bg-[#E6F0E9] text-[#1B523D] flex items-center justify-center text-xs font-bold font-mono">
-                  3
-                </span>
-                <h4 className="font-semibold text-xs uppercase tracking-wider text-[#20251F]">
-                  Deterministic GST Engine
-                </h4>
-              </div>
-              <p className="text-xs text-[#60695C] leading-relaxed">
-                Python <code className="bg-[#EFEFEA] px-1 py-0.5 rounded text-[11px]">decimal.Decimal</code> is the sole authority
-                for Luhn Mod-36 checksums, State Code tax exclusivity, and grand total arithmetic.
-              </p>
-            </div>
-
-            <div className="p-4 bg-[#FAFAF8] rounded-lg border border-[#E2E0D8]">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="w-6 h-6 rounded-full bg-[#E6F0E9] text-[#1B523D] flex items-center justify-center text-xs font-bold font-mono">
-                  4
-                </span>
-                <h4 className="font-semibold text-xs uppercase tracking-wider text-[#20251F]">
-                  GSTR-1 Draft Allocation
-                </h4>
-              </div>
-              <p className="text-xs text-[#60695C] leading-relaxed">
-                Admitted transactions route into Table 4A (B2B) and Table 7 (B2CS), exporting multi-sheet styled Excel workbooks
-                and portal-compliant CSVs.
-              </p>
-            </div>
-          </div>
-        </Card>
-
-        {/* Quick Launch Card */}
-        <Card
-          variant="subtle"
-          header={<span className="font-serif font-bold text-base text-[#20251F]">Quick Workspaces</span>}
-        >
-          <div className="space-y-3 py-1">
-            <button
-              onClick={() => navigate('/studio')}
-              className="w-full text-left p-3.5 bg-white hover:bg-[#E6F0E9] border border-[#E2E0D8] rounded-lg transition-all flex items-center justify-between group cursor-pointer"
-            >
-              <div>
-                <span className="font-semibold text-xs text-[#20251F] block">
-                  🚀 Single Invoice Processing Studio
-                </span>
-                <span className="text-[11px] text-[#60695C]">
-                  Upload scan or select from 25 benchmark samples
-                </span>
-              </div>
-              <ArrowRight className="w-4 h-4 text-[#60695C] group-hover:text-[#246B50] group-hover:translate-x-1 transition-all" />
-            </button>
-
-            <button
-              onClick={() => navigate('/gstr1')}
-              className="w-full text-left p-3.5 bg-white hover:bg-[#E6F0E9] border border-[#E2E0D8] rounded-lg transition-all flex items-center justify-between group cursor-pointer"
-            >
-              <div>
-                <span className="font-semibold text-xs text-[#20251F] block">
-                  📑 GSTR-1 Draft Return &amp; Exports
-                </span>
-                <span className="text-[11px] text-[#60695C]">
-                  Download B2B Table 4A, B2CS CSVs and Excel (.xlsx)
-                </span>
-              </div>
-              <ArrowRight className="w-4 h-4 text-[#60695C] group-hover:text-[#246B50] group-hover:translate-x-1 transition-all" />
-            </button>
-
-            <button
-              onClick={() => navigate('/evaluation')}
-              className="w-full text-left p-3.5 bg-white hover:bg-[#E6F0E9] border border-[#E2E0D8] rounded-lg transition-all flex items-center justify-between group cursor-pointer"
-            >
-              <div>
-                <span className="font-semibold text-xs text-[#20251F] block">
-                  🧪 Scientific Evaluation &amp; Benchmarks
-                </span>
-                <span className="text-[11px] text-[#60695C]">
-                  100% test pass rate, CER/WER deltas, confusion matrices
-                </span>
-              </div>
-              <ArrowRight className="w-4 h-4 text-[#60695C] group-hover:text-[#246B50] group-hover:translate-x-1 transition-all" />
-            </button>
-          </div>
-        </Card>
-      </div>
+            <ArrowRight className="w-4 h-4 text-[#60695C] group-hover:text-[#246B50] group-hover:translate-x-1 transition-all shrink-0 ml-3" />
+          </button>
+        </div>
+      </Card>
     </div>
   );
 };

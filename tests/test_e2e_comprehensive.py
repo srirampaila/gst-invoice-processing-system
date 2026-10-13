@@ -63,8 +63,7 @@ def test_phase_a_ollama_tags():
     "/review",
     "/gstr1",
     "/evaluation",
-    "/performance",
-    "/architecture"
+    "/performance"
 ])
 def test_phase_b_routes_accessible(route):
     status, body = make_request(f"{FRONTEND_URL}{route}")

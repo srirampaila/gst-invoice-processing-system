@@ -40,7 +40,6 @@ export const Navbar: React.FC<NavbarProps> = ({ selectedProvider, onProviderChan
     { path: '/review', label: 'Human Review', icon: <Scale className="w-4 h-4" /> },
     { path: '/gstr1', label: 'GSTR-1 Draft', icon: <Download className="w-4 h-4" /> },
     { path: '/evaluation', label: 'Evaluation', icon: <Activity className="w-4 h-4" /> },
-    { path: '/architecture', label: 'Architecture', icon: <Cpu className="w-4 h-4" /> },
   ];
 
   const currentProvider = providers?.providers.find((p) => p.id === selectedProvider);

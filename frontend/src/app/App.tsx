@@ -9,7 +9,6 @@ import { ConfidenceReviewView } from '../features/review/ConfidenceReviewView';
 import { GSTR1DraftView } from '../features/gstr1/GSTR1DraftView';
 import { TestingEvaluationView } from '../features/evaluation/TestingEvaluationView';
 import { PerformanceProfilingView } from '../features/evaluation/PerformanceProfilingView';
-import { ArchitectureView } from '../features/architecture/ArchitectureView';
 import { PipelineExecutionResult } from '../types';
 import { api } from '../lib/api';
 
@@ -60,7 +59,6 @@ export const App: React.FC = () => {
         <Route path="/gstr1" element={<GSTR1DraftView />} />
         <Route path="/evaluation" element={<TestingEvaluationView />} />
         <Route path="/performance" element={<PerformanceProfilingView />} />
-        <Route path="/architecture" element={<ArchitectureView />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </AppShell>
